@@ -1,0 +1,200 @@
+[
+  {
+    "model": "tenancy.tenant",
+    "pk": 1,
+    "fields": {
+      "name": "Empresa Demo Ltda",
+      "cnpj": "12.345.678/0001-90",
+      "razao_social": "Empresa Demo Ltda",
+      "nome_fantasia": "Demo",
+      "cnae_principal": "4751201",
+      "cnae_secundarios": ["4751202", "4751203"],
+      "uf": "SP",
+      "municipio": "São Paulo",
+      "cep": "01234-567",
+      "endereco": "Rua das Flores, 123 - Centro",
+      "plan": "professional",
+      "billing_status": "active",
+      "lgpd_consent": true,
+      "lgpd_consent_at": "2024-01-01T00:00:00Z",
+      "is_active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "tenancy.domain",
+    "pk": 1,
+    "fields": {
+      "domain": "demo.localhost",
+      "tenant": 1,
+      "is_primary": true
+    }
+  },
+  {
+    "model": "tenancy.tenantconfiguration",
+    "pk": 1,
+    "fields": {
+      "tenant": 1,
+      "enotas_api_key": "",
+      "nfeio_api_key": "",
+      "email_notifications": true,
+      "whatsapp_notifications": false,
+      "sms_notifications": false,
+      "default_markup": "25.00",
+      "risk_factor": "5.00",
+      "custom_templates": {},
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "core.users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$test123$test123",
+      "last_login": null,
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "Admin",
+      "last_name": "Licitrix",
+      "email": "admin@licitrix.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "superadmin",
+      "data_inicio_teste": "2024-01-01T00:00:00Z",
+      "data_fim_teste": "2024-01-08T00:00:00Z",
+      "plano_ativo": false,
+      "data_inicio_plano": null,
+      "data_fim_plano": null,
+      "stripe_customer_id": null,
+      "stripe_subscription_id": null,
+      "mfa_enabled": false,
+      "mfa_secret": null,
+      "consent_lgpd_at": "2024-01-01T00:00:00Z",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "last_activity": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "core.users.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$demo123$demo123",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "demo",
+      "first_name": "Usuário",
+      "last_name": "Demo",
+      "email": "demo@licitrix.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "operador",
+      "data_inicio_teste": "2024-01-01T00:00:00Z",
+      "data_fim_teste": "2024-01-08T00:00:00Z",
+      "plano_ativo": false,
+      "data_inicio_plano": null,
+      "data_fim_plano": null,
+      "stripe_customer_id": null,
+      "stripe_subscription_id": null,
+      "mfa_enabled": false,
+      "mfa_secret": null,
+      "consent_lgpd_at": "2024-01-01T00:00:00Z",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "last_activity": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "oportunidades.edital",
+    "pk": 1,
+    "fields": {
+      "numero": "001/2024",
+      "ano": 2024,
+      "objeto": "Fornecimento de Material de Escritório",
+      "origem": "upload",
+      "status_ingestao": "concluido",
+      "orgao": "Prefeitura Municipal de São Paulo",
+      "uf": "SP",
+      "municipio": "São Paulo",
+      "modalidade": "pregao_eletronico",
+      "valor_estimado": "25000.00",
+      "data_publicacao": "2024-01-15",
+      "data_abertura": "2024-02-01",
+      "data_encerramento": "2024-02-15",
+      "arquivo_original": "editais/originais/edital_001_2024.pdf",
+      "arquivo_processado": {
+        "numero": "001/2024",
+        "ano": 2024,
+        "objeto": "Fornecimento de Material de Escritório",
+        "orgao": "Prefeitura Municipal de São Paulo",
+        "uf": "SP",
+        "municipio": "São Paulo",
+        "modalidade": "pregao_eletronico",
+        "valor_estimado": "25000.00",
+        "data_publicacao": "2024-01-15",
+        "data_abertura": "2024-02-01",
+        "data_encerramento": "2024-02-15"
+      },
+      "itens_extraidos": [
+        {
+          "codigo": "001",
+          "descricao": "Papel A4 75g",
+          "quantidade": "100.00",
+          "unidade": "resma",
+          "valor_unitario_estimado": "15.00"
+        },
+        {
+          "codigo": "002",
+          "descricao": "Caneta esferográfica azul",
+          "quantidade": "500.00",
+          "unidade": "unidade",
+          "valor_unitario_estimado": "1.50"
+        }
+      ],
+      "documentos_exigidos": [
+        {
+          "nome": "Declaração de ME/EPP",
+          "tipo": "declaracao",
+          "obrigatorio": true
+        },
+        {
+          "nome": "Certificado de Regularidade",
+          "tipo": "certificado",
+          "obrigatorio": true
+        }
+      ],
+      "observacoes": "Licitação para material de escritório",
+      "parse_errors": [],
+      "confidence_score": "0.95",
+      "created_at": "2024-01-15T00:00:00Z",
+      "updated_at": "2024-01-15T00:00:00Z",
+      "processed_at": "2024-01-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "oportunidades.oportunidadetenant",
+    "pk": 1,
+    "fields": {
+      "tenant": 1,
+      "edital": 1,
+      "status": "nova",
+      "match_score": "0.85",
+      "keywords_match": ["material", "escritório", "fornecimento"],
+      "relevancia_score": "0.80",
+      "decisao": "",
+      "justificativa": "",
+      "data_analise": null,
+      "responsavel": null,
+      "created_at": "2024-01-15T00:00:00Z",
+      "updated_at": "2024-01-15T00:00:00Z"
+    }
+  }
+]
