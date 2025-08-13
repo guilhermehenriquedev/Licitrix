@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { Toaster } from 'react-hot-toast'
-import { AuthProvider } from '../hooks/useAuth'
+import { AuthProvider } from '../providers/AuthProvider'
+import { ThemeRegistry } from '../components/ThemeRegistry'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,20 +11,6 @@ export const metadata: Metadata = {
   title: 'Licitrix - SaaS de Licitações',
   description: 'Plataforma completa para gestão de licitações públicas',
 }
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1976d2',
-    },
-    secondary: {
-      main: '#dc004e',
-    },
-  },
-  typography: {
-    fontFamily: inter.style.fontFamily,
-  },
-})
 
 export default function RootLayout({
   children,
@@ -34,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <ThemeProvider theme={theme}>
+        <ThemeRegistry>
           <CssBaseline />
           <AuthProvider>
             {children}
@@ -49,7 +35,7 @@ export default function RootLayout({
               }}
             />
           </AuthProvider>
-        </ThemeProvider>
+        </ThemeRegistry>
       </body>
     </html>
   )

@@ -30,9 +30,9 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Include tenant URLs
-urlpatterns += [
-    path('api/', include('core.api.urls')),
+# path('api/', include('core.api.urls')),  # Removido - diretório não existe
     
-    # URLs de autenticação
+# URLs de autenticação
+urlpatterns += [
     path('api/users/', include('core.users.urls')),
 ]

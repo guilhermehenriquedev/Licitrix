@@ -1,28 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import {
-  Box,
-  Container,
-  Grid,
-  Card,
-  CardContent,
-  Typography,
-  Button,
-  Alert,
-  Chip,
-  LinearProgress,
-  Paper,
-} from '@mui/material'
-import {
-  TrendingUp,
-  Assignment,
-  Description,
-  Payment,
-  Warning,
-  CheckCircle,
-  Timer,
-} from '@mui/icons-material'
+import { Box, Container, Typography, Grid, Card, CardContent, Paper, Chip, LinearProgress } from '@mui/material'
 import { useRequireAuth, useRequireSubscription } from '../../hooks/useAuth'
 import { useRouter } from 'next/navigation'
 
@@ -97,42 +76,17 @@ export default function Dashboard() {
                   <Chip
                     label={user.subscription_status === 'ativo' ? 'Plano Ativo' : 'Período de Teste'}
                     color={user.subscription_status === 'ativo' ? 'success' : 'warning'}
-                    icon={user.subscription_status === 'ativo' ? <CheckCircle /> : <Timer />}
+                    sx={{ fontWeight: 'bold' }}
                   />
-                  {user.subscription_status === 'teste' && (
+                  {user.subscription_status !== 'ativo' && (
                     <Typography variant="body2" color="text.secondary">
-                      Restam {user.days_until_trial_end} dias de teste
-                    </Typography>
-                  )}
-                  {user.subscription_status === 'ativo' && (
-                    <Typography variant="body2" color="text.secondary">
-                      Renovação em {user.days_until_subscription_end} dias
+                      {user.days_until_trial_end} dias restantes no período de teste
                     </Typography>
                   )}
                 </Box>
               </Box>
-              
-              {user.subscription_status === 'teste' && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => router.push('/subscription')}
-                >
-                  Fazer Upgrade
-                </Button>
-              )}
             </Box>
           </Paper>
-
-          {/* Aviso de expiração próxima */}
-          {user.subscription_status === 'teste' && user.days_until_trial_end <= 2 && (
-            <Alert severity="warning" sx={{ mb: 3 }}>
-              <Typography variant="body1">
-                <strong>⏰ Atenção:</strong> Seu período de teste termina em {user.days_until_trial_end} dia(s). 
-                Faça upgrade agora para manter acesso ininterrupto à plataforma.
-              </Typography>
-            </Alert>
-          )}
         </Box>
 
         {/* Estatísticas */}
@@ -140,188 +94,91 @@ export default function Dashboard() {
           <Grid item xs={12} sm={6} md={3}>
             <Card>
               <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Assignment color="primary" sx={{ fontSize: 40, mr: 2 }} />
-                  <Box>
-                    <Typography variant="h4" component="div">
-                      {stats.oportunidades}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Oportunidades
-                    </Typography>
-                  </Box>
-                </Box>
+                <Typography variant="h4" component="div" color="primary">
+                  {stats.oportunidades}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Oportunidades
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
-
+          
           <Grid item xs={12} sm={6} md={3}>
             <Card>
               <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <TrendingUp color="secondary" sx={{ fontSize: 40, mr: 2 }} />
-                  <Box>
-                    <Typography variant="h4" component="div">
-                      {stats.propostas}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Propostas
-                    </Typography>
-                  </Box>
-                </Box>
+                <Typography variant="h4" component="div" color="primary">
+                  {stats.propostas}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Propostas
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
-
+          
           <Grid item xs={12} sm={6} md={3}>
             <Card>
               <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Description color="success" sx={{ fontSize: 40, mr: 2 }} />
-                  <Box>
-                    <Typography variant="h4" component="div">
-                      {stats.contratos}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Contratos
-                    </Typography>
-                  </Box>
-                </Box>
+                <Typography variant="h4" component="div" color="primary">
+                  {stats.contratos}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Contratos
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
-
+          
           <Grid item xs={12} sm={6} md={3}>
             <Card>
               <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Payment color="info" sx={{ fontSize: 40, mr: 2 }} />
-                  <Box>
-                    <Typography variant="h4" component="div">
-                      {stats.faturas}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Faturas
-                    </Typography>
-                  </Box>
-                </Box>
+                <Typography variant="h4" component="div" color="primary">
+                  {stats.faturas}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Faturas
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
         </Grid>
 
-        {/* Ações rápidas */}
-        <Grid container spacing={3} sx={{ mb: 4 }}>
-          <Grid item xs={12} md={6}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Ações Rápidas
-                </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  <Button
-                    variant="outlined"
-                    fullWidth
-                    onClick={() => router.push('/oportunidades/nova')}
-                  >
-                    Nova Oportunidade
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    fullWidth
-                    onClick={() => router.push('/precificacao')}
-                  >
-                    Precificar Item
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    fullWidth
-                    onClick={() => router.push('/documentos/gerar')}
-                  >
-                    Gerar Documento
-                  </Button>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} md={6}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Notificações
-                </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  <Alert severity="info">
-                    <Typography variant="body2">
-                      Nova oportunidade disponível em sua região
-                    </Typography>
-                  </Alert>
-                  <Alert severity="warning">
-                    <Typography variant="body2">
-                      Prazo para envio da proposta vence em 2 dias
-                    </Typography>
-                  </Alert>
-                  <Alert severity="success">
-                    <Typography variant="body2">
-                      Documento gerado com sucesso
-                    </Typography>
-                  </Alert>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-
-        {/* Oportunidades recentes */}
-        <Card>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Oportunidades Recentes
-            </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {recentOportunidades.map((oportunidade) => (
-                <Box
-                  key={oportunidade.id}
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    p: 2,
-                    border: '1px solid',
-                    borderColor: 'divider',
-                    borderRadius: 1,
-                  }}
-                >
-                  <Box>
-                    <Typography variant="subtitle1" gutterBottom>
+        {/* Oportunidades Recentes */}
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h5" gutterBottom>
+            Oportunidades Recentes
+          </Typography>
+          
+          <Grid container spacing={2}>
+            {recentOportunidades.map((oportunidade) => (
+              <Grid item xs={12} md={6} lg={4} key={oportunidade.id}>
+                <Card>
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom>
                       {oportunidade.titulo}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {oportunidade.orgao} • {oportunidade.valor}
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                      <strong>Órgão:</strong> {oportunidade.orgao}
                     </Typography>
-                  </Box>
-                  <Box sx={{ textAlign: 'right' }}>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                      <strong>Valor:</strong> {oportunidade.valor}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                      <strong>Prazo:</strong> {oportunidade.prazo}
+                    </Typography>
                     <Chip
                       label={oportunidade.status}
-                      color={
-                        oportunidade.status === 'Em análise'
-                          ? 'warning'
-                          : oportunidade.status === 'Precificando'
-                          ? 'info'
-                          : 'success'
-                      }
+                      color="primary"
                       size="small"
+                      sx={{ mt: 1 }}
                     />
-                    <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                      Prazo: {oportunidade.prazo}
-                    </Typography>
-                  </Box>
-                </Box>
-              ))}
-            </Box>
-          </CardContent>
-        </Card>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </Box>
     </Container>
   )

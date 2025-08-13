@@ -289,7 +289,7 @@ class DocumentoExigido(models.Model):
         ('outro', 'Outro'),
     ]
     
-    edital = models.ForeignKey(Edital, on_delete=models.CASCADE, related_name='documentos_exigidos')
+    edital = models.ForeignKey(Edital, on_delete=models.CASCADE, related_name='documentos_exigidos_rel')
     
     nome = models.CharField('Nome do Documento', max_length=200)
     tipo = models.CharField('Tipo', max_length=20, choices=TIPO_CHOICES, default='declaracao')
